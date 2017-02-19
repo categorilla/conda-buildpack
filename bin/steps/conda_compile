@@ -9,6 +9,10 @@ if [ ! -d /app/.heroku/miniconda ]; then
     rm -fr ${CONDA_VERSION}
 
     conda update conda --quiet --yes | indent
+
+    echo "nomkl" > $HOME/.heroku/miniconda/conda-meta/pinned
+    echo "added pinned file in $HOME/.heroku/miniconda/conda-meta/pinned"
+    conda install nomkl
 fi
 
 
