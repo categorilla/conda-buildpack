@@ -11,15 +11,14 @@ if [ ! -d /app/.heroku/miniconda ]; then
     conda update conda --quiet --yes | indent
 fi
 
-
-if [ -f conda-requirements.txt ]; then
-    puts-step "Installing dependencies using Conda"
-    conda install --file conda-requirements.txt --yes
-fi
-
 if [ -f environment.yml ]; then
     puts-step "Creating conda environment"
-    conda env create --name=heroku-env --file environment.yml
+    if [ ! -d /app/.heroku/miniconda/envs/heroku-env ]; then
+        echo "No cached env. Creating new one called `heroku-env`."
+        conda env create --name=heroku-env --file environment.yml
+    fi
+    echo "Updating `heroku-env`."
+    conda env update --name=heroku-env --file environment.yml
 fi
 
 # Clean up the installation environment .
