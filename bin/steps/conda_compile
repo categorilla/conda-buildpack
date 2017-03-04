@@ -14,10 +14,10 @@ fi
 if [ -f environment.yml ]; then
     puts-step "Creating conda environment"
     if [ ! -d /app/.heroku/miniconda/envs/heroku-env ]; then
-        echo "No cached env. Creating new one called `heroku-env`."
+        echo "No cached env. Creating new one called 'heroku-env'."
         conda env create --name=heroku-env --file environment.yml
     fi
-    echo "Updating `heroku-env`."
+    echo "Updating 'heroku-env'."
     conda env update --name=heroku-env --file environment.yml
 fi
 
